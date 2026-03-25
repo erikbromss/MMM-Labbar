@@ -59,10 +59,15 @@ def npp(beta = 0.35, b1 = 600):
        
        Parameters: 
        
-       beta: CO2 Fertilization Factor - reference value of 0.35 but presumed to range
-             between 0.1 - 0.8 [no unit]
+        beta: CO2 Fertilization Factor - reference value of 0.35 but presumed to range 
+                between 0.1 - 0.8 [no unit]
        
-       b1:   present day carbon content of the atmosphere [GtC]
+        b1:   present day carbon content of the atmosphere [GtC]
+    
+    
+       Returns: 
+
+        npp: Net Primary Production of biomass resulting from photosynthesis a given year
        
        
        """
@@ -73,6 +78,27 @@ def npp(beta = 0.35, b1 = 600):
 
 
 def forward_euler(beta, time, u):
+    """Parameters:
+        
+        beta: C02 fertilization factor [no unit]
+        
+        time: The number of years for which to approximate the carbon content of the boxes [int]
+        
+        u: A list of size = time containing the C02 emissions for each year
+
+       
+       Returns: 
+
+        b1, b2, b3: Time series (list) of carbon content in each Box every year
+                    as approximated by the forward euler method.
+
+    
+       NOTES: 
+        Emissions need to correspond to the time series for this to give reasonable results.
+        You can't for example slice emission data from 1900-2000 and use those 100 datapoints
+        to calculate carbon contents for the years 1800-1900. See to it that this is handled correctly. 
+        """
+
 
     b1 = [600.0]
     b2 = [600.0]
