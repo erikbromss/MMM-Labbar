@@ -50,4 +50,23 @@
 #    havsupptag EJ ingår ännu (läggs till i uppg. 3–6).
 # 5. Testa olika β-värden (uppg. 2) och observera effekten på B1, B2, B3.
 # =============================================================================
+import numpy as np
 
+def npp(beta = 0.35, b1 = 600):
+    """Returns Net Primary Production of biomass resulting from photosynthesis
+       modeled with a logarithmic dependency on the present day carbon content
+       of the atmosphere (box 1). 
+       
+       Parameters: 
+       
+       beta: CO2 Fertilization Factor - reference value of 0.35 but presumed to range
+             between 0.1 - 0.8 [no unit]
+       
+       b1:   present day carbon content of the atmosphere [GtC]
+       
+       
+       """
+    npp0 = 60 #[GtC]
+    b10 = 600
+
+    return npp0 * (1 + beta*np.log(b1/b10) )
