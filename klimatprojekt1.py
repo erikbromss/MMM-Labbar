@@ -72,20 +72,22 @@ def npp(beta = 0.35, b1 = 600):
     return npp0 * (1 + beta*np.log(b1/b10) )
 
 
-def forward_euler(beta, b1, time, u):
+def forward_euler(beta, time, u):
 
-    b1 = [600]
-    b2 = [600]
-    b3 = [1500]
+    b1 = [600.0]
+    b2 = [600.0]
+    b3 = [1500.0]
 
     alpha_21 = 60 / 600 
     alpha_31 = 15 / 1500 
     alpha_23 = 45 / 600
     
-    for i in range(1,time):
-        b1.append(alpha_31 * b3[i-1] + alpha_21 - npp(beta, b1[i-1]) + u + b1[i-1])
+    for i in range(1, time+1):
+        b1.append(alpha_31 * b3[i-1] + alpha_21*b2[i-1] - npp(beta, b1[i-1]) + u[i-1] + b1[i-1])
         b2.append(npp(beta, b1[i-1])- alpha_23 * b2[i-1] - alpha_21 * b2[i-1] + b2[i-1])
         b3.append(alpha_23 * b2[i-1] - alpha_31 * b3[i-1] + b3[i-1])
+
+    return b1, b2, b3
 
 
 
