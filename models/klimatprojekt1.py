@@ -8,16 +8,16 @@
 #   B3 = Mark/rötter       1500 GtC
 #
 # PRE-INDUSTRIELLA FLÖDEN (GtC/år), från Figur 2:
-#   F21 = 60  (B2 → B1, respiration från biomassa)
-#   F31 = 15  (B3 → B1, respiration från mark)
+#   F21 = 15  (B2 → B1, respiration från biomassa)
+#   F31 = 45  (B3 → B1, respiration från mark)
 #   F12 = 60  (B1 → B2, fotosyntes / NPP₀)  <-- OBS: se NPP nedan
 #   F23 = 45  (B2 → B3, litterfall till mark)
 #
 # LINJÄRA KOEFFICIENTER (fraktion av Bi som flödar till Bj per år):
 #   α_ij = F_ij,0 / B_i,0      (antas konstanta oavsett boxstorlek)
 #
-#   alpha_21 = 60 / 600  = 0.100   (B2 → B1)
-#   alpha_31 = 15 / 1500 = 0.010   (B3 → B1)
+#   alpha_21 = 15 / 600  = 0.100   (B2 → B1)
+#   alpha_31 = 45 / 1500 = 0.010   (B3 → B1)
 #   alpha_23 = 45 / 600  = 0.075   (B2 → B3)
 #
 # FOTOSYNTES / NET PRIMARY PRODUCTION (NPP):
@@ -51,6 +51,8 @@
 # 5. Testa olika β-värden (uppg. 2) och observera effekten på B1, B2, B3.
 # =============================================================================
 import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 def npp(beta = 0.35, b1 = 600):
     """Returns Net Primary Production of biomass resulting from photosynthesis
@@ -104,8 +106,8 @@ def forward_euler(beta, time, u):
     b2 = [600.0]
     b3 = [1500.0]
 
-    alpha_21 = 60 / 600 
-    alpha_31 = 15 / 1500 
+    alpha_21 = 15 / 600 
+    alpha_31 = 45 / 1500 
     alpha_23 = 45 / 600
     
     for i in range(1, time+1):
@@ -114,6 +116,58 @@ def forward_euler(beta, time, u):
         b3.append(alpha_23 * b2[i-1] - alpha_31 * b3[i-1] + b3[i-1])
 
     return b1, b2, b3
+
+# Ta fram dataframes 
+kdf = pd.read_csv("koncentrationerRCP45.csv")
+udf = pd.read_csv("utslappRCP45.csv")
+
+# Konvertera till listor för plots
+ulist = udf["CO2 Emissions  (CO2 GtC/yr)"].to_list()
+utime = udf["Time (year)"].to_list()
+
+klist = kdf["CO2ConcRCP45 (ppm CO2) "].to_list()
+
+b1, b2, b3 = forward_euler(0.35, len(ulist), ulist)
+
+# Task 1: Gå från atmosfärsmassa -> Koncentration: B1 * 0.469
+
+b1konc = [x*0.469 for x in b1]
+
+start_year = utime[0]
+years = list(range(start_year, start_year + len(b1)))
+
+plt.figure()
+plt.plot(years, b1konc, color = 'r', label = "Model Concentration C02")
+plt.plot(utime, klist, color = 'g', label = "RCP45 Concentration Data")
+plt.legend()
+plt.xlabel("Year")
+plt.ylabel("CO2 Concentration (ppm)")
+plt.title("Atmospheric Concentration of C02 (PPM): Model vs Data")
+plt.grid()
+plt.show()
+
+# Task 2
+
+betas = [0.1, 0.35, 0.8]
+
+plt.figure()
+for beta in betas:
+    b1, b2, b3 = forward_euler(beta, len(ulist), ulist)
+    b1konc = [x * 0.469 for x in b1]
+    plt.plot(utime, b1konc, label = f'β = {beta}')
+
+plt.plot(utime, klist, color = 'g', linestyle = "--", label = "RCP45 Concentration Data")
+plt.legend()
+plt.xlabel("Year")
+plt.ylabel("CO2 Concentration (ppm)")
+plt.title("Effekt av CO₂-gödslingsparameter β på atmosfärisk CO₂")
+plt.grid()
+plt.show()
+
+
+
+
+
 
 
 
