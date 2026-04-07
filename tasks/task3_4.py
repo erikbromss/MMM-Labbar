@@ -49,3 +49,9 @@ plt.show()
 # since the industrialisation that a significant amount of past emissions have been 
 # transported to deep-sea levels by the ocean. The result is a net reduction in emissions per year
 # as given by our ocean-absorbtion model. 
+
+# --- Alternativt ---: 
+# Den röda kurvan vänder nedåt eftersom vi i RCP4.5 "slutar elda" snabbare än vad havet
+# hinner bli mättat. Det är havets långsamma processer (djuphavsmixning) som drar
+# ner halten när de årliga utsläppen inte längre räcker till för att hålla koncentrationen uppe.
+# Vi tar inte här hänsyn till mättnadseffekter från biosfären
