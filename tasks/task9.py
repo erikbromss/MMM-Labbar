@@ -22,3 +22,14 @@ def total_radiative_forcing(rf_df, s=1.0):
     return rf_total
 
 
+def other_aerosol_total_rf(rfdf, s = 1.0):
+
+    rf_aerosol = rfdf["RF aerosols (W/m2)"].to_numpy() * s
+    rf_other   = rfdf["RF other than CO2 and aerosols (W/m2)"].to_numpy()
+    
+
+    rf_total = rf_aerosol + rf_other
+    return rf_total
+
+    
+    
