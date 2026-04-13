@@ -157,7 +157,35 @@ fig.suptitle('11b): MGSTI — modell vs NASA för olika λ, s och κ (gemensam l
 plt.tight_layout()
 plt.show()
 
+# --- 11c) ---
 
+# Det är möjligt såklart, men försvåras
+# markant (kan jag tänka mig) av att parametrarna är 
+# sammanflätade, eller co-dependent på varandra. 
+# Vi såg ex. i 11b) att olika kombinationer av lambda, kappa och s
+# kan ge väldigt lika data, näranpassad till NASA-datan. 
+# Sammanflätningen tycks ju logiskt: 
+# ett högt lambda (mycket uppvärmning) kan kompenseras med
+# lågt s (aerosoler kyler) eller med ett högt kappa, dvs djuphavet
+# absorberar mer. 
+# Omvändningen blir att lågt lambda kan kompenseras med högt s
+# och lågt k. 
+# Parametrarna är antagligen inte identifierbara från endast temperaturdata.
+# Hade vi haft mer observationsdata, typ tusentals år snarare än 140, 
+# hade vi kanske kunat separera kappa och lambda. Nu fångar vi inte
+# upp mycket av de långsamma dynamikerna. 
+# Dessutom tar vår modell inte in något brus som NASA datan. 
+# Där finns variabilitet i temperaturförändring från saker som vulkanutbrott
+# eller annat som vår modell inte tar hänsyn till. 
+
+# Om man skulle ta en bayesiansk approach och använda flera observationer simultant, 
+# ex yttemperatur + havsvärmeinnehåll (kappa känsligt) + strålningsdata
+# från sattelit (känsligt för lambda) och atmosfäriska aerosolkoncentrationer (för s)
+# så kan man nog få en hygglig skattning av varje enskild parameter. 
+# Man kombinerar prior fördelningar (modeller etc.) för respektive parameter
+# och likelihood från faktiska observationer för att 
+# få smalare posteriorfördelningar, men enda såklart innehåller även dessa
+# en viss osäkerhet. 
 
 
 
