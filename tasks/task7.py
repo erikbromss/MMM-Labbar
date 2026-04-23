@@ -11,8 +11,8 @@ root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, root_dir)
 sys.path.insert(0, os.path.join(root_dir, "models"))
 
-from biosphere import B1_0 # Hittas nu eftersom models/ lagts till i path
-from biosphere_and_oceans import combined_ocean_biosphere
+from models.biosphere import B1_0 # Hittas nu eftersom models/ lagts till i path
+from models.biosphere_and_oceans import combined_ocean_biosphere
 
 
 
@@ -44,7 +44,7 @@ for b, label in zip(beta_scenarios, beta_labels):
 
 ax1.plot(years, concentrations, 'k--', label = 'Reference Concentrations (RCP45) ', alpha = 0.5)
 ax1.set_title('Sensitivity Analysis: Biosphere Beta')
-ax1.set_ylabel('C02 Concentration (ppm)')
+ax1.set_ylabel('C02 Atmospheric Concentration (ppm)')
 ax1.set_xlabel('Year')
 ax1.legend()
 ax1.grid(True)
@@ -79,7 +79,7 @@ plt.show()
 # Högt k simulerar ett hav som snabbt blir fullt. Därmed 
 # därmed försämras dess förmåga att binda C02 tidigare och 
 # en större andel av utsläppen stannar då kvar i luften. 
-# Lägt k ger motsatsen. Haven har god förmåga att absorbera koldioxid, 
+# Lågt k ger motsatsen. Haven har god förmåga att absorbera koldioxid, 
 # och det länge. Trots att vi vräker ut utsläpp. Därmed blir 
 # C02-atmosfärskoncentrationskurvan mycket flackare. 
 

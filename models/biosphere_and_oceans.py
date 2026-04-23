@@ -1,8 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from biosphere import B1_0, B2_0, B3_0, NPP0, ALPHA_21, ALPHA_23, ALPHA_31, npp 
-from oceans import impuls, m0
+from models.biosphere import B1_0, B2_0, B3_0, NPP0, ALPHA_21, ALPHA_23, ALPHA_31, npp 
+from models.oceans import impuls, m0
 
 def combined_ocean_biosphere(years, antro_emissions, beta = 0.35, k = 3.06e-3):
     """

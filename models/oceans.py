@@ -10,7 +10,7 @@ k = 3.06*10**(-3)
 
 # Definiera impulsfunktionen
 
-def impuls(t: float, ucum: float, k):
+def impuls(t: float, ucum: float, k = 3.06e-3):
 
     tauis = [tau0 * (1+k*ucum) for tau0 in tau0s]
 
