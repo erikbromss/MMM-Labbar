@@ -38,7 +38,7 @@ fig, (ax1, ax2) = plt.subplots(1, 2, figsize = (15, 6))
 # Plotta varierande Beta
 
 for b, label in zip(beta_scenarios, beta_labels):
-    m_atm, _, _ = combined_ocean_biosphere(years, emissions, beta = b, k = k_base)
+    m_atm, b2, b3 = combined_ocean_biosphere(years, emissions, beta = b, k = k_base)
     konc_atm = to_ppm(m_atm)
     ax1.plot(years, konc_atm, label = label)
 
