@@ -14,8 +14,6 @@ sys.path.insert(0, os.path.join(root_dir, "models"))
 from models.biosphere import B1_0 # Hittas nu eftersom models/ lagts till i path
 from models.biosphere_and_oceans import combined_ocean_biosphere
 
-
-
 from utils import load_emissions, load_concentrations, to_ppm
 years, emissions = load_emissions()
 _, concentrations = load_concentrations()

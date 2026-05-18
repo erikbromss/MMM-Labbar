@@ -21,8 +21,7 @@ rftot = total_radiative_forcing(rfdf)
 def energybalance(rftot, c1 = 6.77, c2 = 270.6, lam = 0.8, k = 0.5):
 
     #Initialize (Pre-Industrial) data for RF, delta_T1, delta_T2
-    
-    
+      
     delta_T1_0 = 0
     delta_T2_0 = 0
 
